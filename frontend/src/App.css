@@ -45,6 +45,20 @@ button.exit{
     background-color: transparent;
     color: brown;
 }
-h3{
+h3,h2{
     text-align: center;
+}
+div.invalid{
+    display: block;
+    text-align: center;
+}
+div.invalid p{
+    margin-bottom: 40px;
+}
+div.invalid a{
+    background-color: #0081DE;
+    color: white;
+    margin: 0 auto;
+    text-align: center;
+    padding: 8px 30px;
 }
