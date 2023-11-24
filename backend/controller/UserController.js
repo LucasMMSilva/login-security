@@ -4,6 +4,9 @@ const jwt = require('jsonwebtoken')
 
 const jwtSecret = 'secret'
 
+const generateToken = (id)=>{
+    return jwt.sign({id},jwtSecret,{expiresIn:'7d'})
+}
 
 const register = async (req,res)=>{
     const {username,email,password} = req.body
