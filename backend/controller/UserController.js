@@ -85,7 +85,7 @@ const register = async (req,res)=>{
 
     const newUser = await user.save()
 
-    res.status(201).json({_id: newUser._id,token:generateToken(newUser._id)})
+    res.status(201).json({id: newUser._id,token:generateToken(newUser._id)})
 }
 
 const login = async(req,res)=>{
@@ -103,10 +103,23 @@ const login = async(req,res)=>{
         return
     }
 
-    res.status(201).json({_id:user._id, token: generateToken(user._id)})
+    res.status(201).json({id:user._id, token: generateToken(user._id)})
     
+}
+
+const getUserById = (req,res)=>{
+    const {id} = req.body
+    let data = []
+    User.findById(id).then((response)=>{
+        data = response.data
+    }).catch((err)=>{
+        res.status(422).json({errors:'User not found.',type:'USER',time:0})
+        return
+    })
+    res.status(201).json(data)
 }
 module.exports = {
     register,
-    login
+    login,
+    getUserById
 }
