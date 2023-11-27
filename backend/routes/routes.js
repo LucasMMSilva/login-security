@@ -4,7 +4,7 @@ const {register,login,getUserById} = require('../controller/UserController')
 const authUser = require('../middlewares/authUser')
 
 route.post('/register',register)
-route.post('/register',login)
+route.post('/login',login)
 
 route.get('/',authUser,getUserById)
 

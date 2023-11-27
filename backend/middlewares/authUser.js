@@ -1,6 +1,6 @@
 const User = require('../models/User')
 const jwt = require('jsonwebtoken')
-const jwtSecret = process.env.SECRET_JWT
+const jwtSecret = process.env.JWTSECRET
 const authUser = async(req,res,next)=>{
     const authHeader = req.headers['authorization']
     

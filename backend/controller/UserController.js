@@ -2,10 +2,8 @@ const User = require('../models/User')
 const bcrypt = require('bcryptjs')
 const jwt = require('jsonwebtoken')
 
-const jwtSecret = 'secret'
-
 const generateToken = (id)=>{
-    return jwt.sign({id},jwtSecret,{expiresIn:'7d'})
+    return jwt.sign({id},process.env.JWTSECRET,{expiresIn:'7d'})
 }
 
 const register = async (req,res)=>{
@@ -107,17 +105,17 @@ const login = async(req,res)=>{
     
 }
 
-const getUserById = (req,res)=>{
-    const {id} = req.body
-    let data = []
-    User.findById(id).then((response)=>{
-        data = response.data
-    }).catch((err)=>{
-        res.status(422).json({errors:'User not found.',type:'USER',time:0})
+const getUserById = async(req,res)=>{
+    const userid = req.user.id
+    
+    const data = await User.findById(userid)
+    if(!data){
+        res.status(404).json({errors:'User dont found.',type:'LOGIN password',time:0})
         return
-    })
+    }
     res.status(201).json(data)
 }
+
 module.exports = {
     register,
     login,
