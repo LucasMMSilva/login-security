@@ -2,12 +2,12 @@ import { useAuthContext } from "./useAuthContext";
 import { useNavigate } from "react-router-dom"
 import api from "./api";
 export const useAuthentication = () =>{
-    const {authenticated,setAutheticated} = useAuthContext()
+    const {authenticated,setAuthenticated} = useAuthContext()
     const navigate = useNavigate()
 
     const authUser = (data) => {
         localStorage.setItem('token',data.token)
-        setAutheticated(true)
+        setAuthenticated(true)
         navigate('/')
     }
     const register = (data) => {
@@ -20,7 +20,7 @@ export const useAuthentication = () =>{
     const logout = ()=>{
         localStorage.removeItem('token')
         api.defaults.headers.Authorization = undefined
-        setAutheticated(false)
+        setAuthenticated(false)
         navigate('/login')
     }
 
