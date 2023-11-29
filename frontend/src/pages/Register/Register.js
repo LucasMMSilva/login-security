@@ -10,7 +10,7 @@ const Register = () => {
   const [password, setPassword] = useState('')
 
   const navigate = useNavigate()
-
+  
   useEffect(()=>{
     if(authenticated){
       navigate('/')

@@ -108,7 +108,7 @@ const login = async(req,res)=>{
 const getUserById = async(req,res)=>{
     const userid = req.user.id
     
-    const data = await User.findById(userid)
+    const data = await User.findById(userid).select('-password')
     if(!data){
         res.status(404).json({errors:'User dont found.',type:'LOGIN password',time:0})
         return

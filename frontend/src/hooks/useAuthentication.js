@@ -24,5 +24,6 @@ export const useAuthentication = () =>{
         navigate('/login')
     }
 
+  
     return {register,login,logout}
 }
