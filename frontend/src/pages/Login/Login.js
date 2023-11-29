@@ -1,13 +1,19 @@
-import {useState} from 'react'
-import {Link} from 'react-router-dom'
+import {useEffect, useState} from 'react'
+import {Link,useNavigate} from 'react-router-dom'
 import { useAuthentication } from '../../hooks/useAuthentication'
+import { useAuthContext } from '../../hooks/useAuthContext'
 const Login = () => {
-  
+  const {authenticated} =useAuthContext()
   const {login} = useAuthentication()
-  
+  const navigate = useNavigate()
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
 
+  useEffect(()=>{
+    if(authenticated){
+      navigate('/')
+    }
+  },[])
 
   const handleSubmit = (e)=>{
     e.preventDefault()

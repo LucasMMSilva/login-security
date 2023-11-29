@@ -83,7 +83,7 @@ const register = async (req,res)=>{
 
     const newUser = await user.save()
 
-    res.status(201).json({id: newUser._id,token:generateToken(newUser._id)})
+    res.status(201).json({token:generateToken(newUser._id)})
 }
 
 const login = async(req,res)=>{
@@ -101,7 +101,7 @@ const login = async(req,res)=>{
         return
     }
 
-    res.status(201).json({id:user._id, token: generateToken(user._id)})
+    res.status(201).json({token: generateToken(user._id)})
     
 }
 
