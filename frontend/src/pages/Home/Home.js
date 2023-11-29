@@ -10,7 +10,6 @@ const Home = () => {
   const token = localStorage.getItem('token')
   const [user,setUser] = useState([])
   useEffect(()=>{
-    console.log(authenticated)
     if(!authenticated){
       navigate('/login')
     }
@@ -34,3 +33,4 @@ const Home = () => {
 }
 
 export default Home
+
