@@ -1,9 +1,12 @@
 const User = require('../models/User')
 const bcrypt = require('bcryptjs')
 const jwt = require('jsonwebtoken')
+const {saveUserAndToken} = require('./LogAuthenticationController')
 
 const generateToken = (id)=>{
-    return jwt.sign({id},process.env.JWTSECRET,{expiresIn:'7d'})
+    const token = jwt.sign({id},process.env.JWTSECRET,{expiresIn:'1d'})
+    saveUserAndToken(id,token)
+    return token
 }
 
 const register = async (req,res)=>{

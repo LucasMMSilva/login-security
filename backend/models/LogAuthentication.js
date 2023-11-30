@@ -6,6 +6,6 @@ const logsSchema = new Schema({
     token:String
 })
 
-const LogsAuthentication = mongoose.model('LogsAuthentication',logsSchema)
+const LogAuthentication = mongoose.model('LogAuthentication',logsSchema)
 
-module.exports = LogsAuthentication
+module.exports = LogAuthentication

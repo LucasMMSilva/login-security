@@ -9,17 +9,20 @@ const Home = () => {
   const navigate = useNavigate()
   const token = localStorage.getItem('token')
   const [user,setUser] = useState([])
+  
   useEffect(()=>{
     if(!authenticated){
       navigate('/login')
+    }else{
+      api.get('/',{
+        headers:{
+          authorization:`Bearer ${token}`
+        }
+      }).then((res)=>{
+        setUser(res.data)
+      })
     }
-    api.get('/',{
-      headers:{
-        authorization:`Bearer ${token}`
-      }
-    }).then((res)=>{
-      setUser(res.data)
-    })
+    
   },[])
 
   return (
