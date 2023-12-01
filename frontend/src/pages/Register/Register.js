@@ -4,7 +4,7 @@ import { useAuthentication } from '../../hooks/useAuthentication'
 import { useAuthContext } from '../../hooks/useAuthContext'
 const Register = () => {
   const {register} = useAuthentication()
-  const {authenticated} =useAuthContext()
+  const {authenticated,error} =useAuthContext()
   const [username, setUsername] = useState('')
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
@@ -15,6 +15,7 @@ const Register = () => {
     if(authenticated){
       navigate('/')
     }
+    console.log(error.type)
   },[])
 
   const handleSubmit = (e)=>{
@@ -31,13 +32,33 @@ const Register = () => {
     <div className="formContainer">
         <h1>Register</h1>
         <form onSubmit={handleSubmit}>
+
             <label htmlFor="username">User name:</label>
             <input onChange={(e)=>setUsername(e.target.value)} name='username' type="text" value={username}/>
+            {error.type === 'REGISTER username' && (
+              <div className='error'>
+                <p>{error.errors}</p>
+              </div>
+            )}
+
             <label htmlFor="email">E-mail:</label>
             <input onChange={(e)=>setEmail(e.target.value)} name='email' type="email" value={email}/>
+            {error.type === 'REGISTER email' && (
+              <div className='error'>
+                <p>{error.errors}</p>
+              </div>
+            )}
+
             <label htmlFor="password">Password:</label>
             <input onChange={(e)=>setPassword(e.target.value)} name='password' type="password" value={password}/>
+            {error.type === 'REGISTER password' && (
+              <div className='error'>
+                <p>{error.errors}</p>
+              </div>
+            )}
+
             <button type="submit">Register</button>
+
         </form>
         <p>You already have an account? <Link to='/Login'>Click here</Link>.</p>
     </div>

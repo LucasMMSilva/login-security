@@ -11,7 +11,7 @@ export const useAuthentication = () =>{
         navigate('/')
     }
     const register = async(data) => {
-        await api.post('/register',data).then((response)=>{authUser(response.data)}).catch((err)=>{console.log('Erro no registro!')})
+        await api.post('/register',data).then((response)=>{authUser(response.data)}).catch((err)=>{setError(err.response.data)})
     }
     const login = async(data) => {
         await api.post('/login',data).then((response)=>{authUser(response.data)}).catch((err)=>{
