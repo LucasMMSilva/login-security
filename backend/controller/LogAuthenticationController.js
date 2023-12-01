@@ -10,8 +10,16 @@ const saveUserAndToken = async (userId,token) => {
     const userLog = await log.save()
     return userLog 
 }
-const removeLogToken = async (userId)=>{
-    await LogAuthentication.deleteOne(userId)
+const removeLogToken = async (req,res)=>{
+    const log = await LogAuthentication.findOne(req.user.userId)
+    console.log(log)
+    if(log){
+        await LogAuthentication.deleteOne(log)
+    }else{
+        res.status(422).json({msg:'Algo deu errado',isSuccess:false})
+        return
+    }
+    res.status(200).json({msg:'token apagado',isSuccess:true})
 }
 
 module.exports = {saveUserAndToken,removeLogToken}

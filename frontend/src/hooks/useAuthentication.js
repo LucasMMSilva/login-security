@@ -17,11 +17,22 @@ export const useAuthentication = () =>{
         api.post('/login',data).then((response)=>{authUser(response.data)}).catch((err)=>{console.log('Erro no login!')})
     }
 
-    const logout = ()=>{
-        localStorage.removeItem('token')
-        api.defaults.headers.Authorization = undefined
-        setAuthenticated(false)
-        navigate('/login')
+    const logout = async()=>{
+        const token = localStorage.getItem('token')
+        await api.delete('/exit',{
+            headers:{
+              authorization:`Bearer ${token}`
+            }
+        }).then((response)=>{
+            console.log(response.data.msg)
+            api.defaults.headers.Authorization = undefined
+            localStorage.removeItem('token')
+            setAuthenticated(false)
+            navigate('/login')
+        }).catch((err)=>{
+            console.log(err.response.data.msg)
+        })
+        
     }
 
   
