@@ -24,13 +24,12 @@ export const useAuthentication = () =>{
               authorization:`Bearer ${token}`
             }
         }).then((response)=>{
-            console.log(response.data.msg)
             api.defaults.headers.Authorization = undefined
             localStorage.removeItem('token')
             setAuthenticated(false)
             navigate('/login')
         }).catch((err)=>{
-            console.log(err.response.data.msg)
+            
         })
         
     }
