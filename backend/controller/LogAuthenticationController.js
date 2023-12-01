@@ -12,7 +12,6 @@ const saveUserAndToken = async (userId,token) => {
 }
 const removeLogToken = async (req,res)=>{
     const log = await LogAuthentication.findOne(req.user.userId)
-    console.log(log)
     if(log){
         await LogAuthentication.deleteOne(log)
     }else{
