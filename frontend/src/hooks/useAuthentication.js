@@ -15,7 +15,7 @@ export const useAuthentication = () =>{
     }
     const login = async(data) => {
         await api.post('/login',data).then((response)=>{authUser(response.data)}).catch((err)=>{
-            if(err.response.data.isLogged === true){setError(true)}
+            setError(err.response.data)
         })
     }
 

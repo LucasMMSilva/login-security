@@ -32,16 +32,30 @@ const Login = () => {
     <div className="formContainer">
         <h1>Login</h1>
         <form onSubmit={handleSubmit}>
+
             <label htmlFor="">E-mail:</label>
             <input onChange={(e)=>setEmail(e.target.value)} type="email" value={email}/>
+            {error.type === 'LOGIN email' &&
+              <div className='error'>
+                <p>{error.errors}</p>
+              </div>
+            }
+        
             <label htmlFor="">Password:</label>
             <input onChange={(e)=>setPassword(e.target.value)} type="password" value={password}/>
+            {error.type === 'LOGIN password' &&
+              <div className='error'>
+                <p>{error.errors}</p>
+              </div>
+            }
+
             <button type="submit">Login</button>
+
         </form>
         <p>Not have an account yet? <Link to='/register'>Click here</Link>.</p>
-        {error && (
+        {error.type === 'LOGIN logUser' && (
           <div className='error'>
-            <p>O canta de usuário em que você está tentando se conectar já está em uso, você não tem permição para acessa-la.</p>
+            <p>{error.errors}</p>
           </div>
         )}
     </div>

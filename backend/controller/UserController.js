@@ -106,9 +106,9 @@ const login = async(req,res)=>{
     }
 
     const isLogged = await CheckIfTheUserIsAlreadyLoggedIn(user._id.toString())
-    console.log('2 '+isLogged)
+    
     if(isLogged){
-        res.status(422).json({errors:'Logged user.',type:'LOGIN logUser',isLogged:true})
+        res.status(422).json({errors:'The user account you are trying to log in to is already in use, you do not have permission to access it.',type:'LOGIN logUser',isLogged:true})
         return
     }
 
