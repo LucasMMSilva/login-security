@@ -3,13 +3,12 @@ import {Link,useNavigate} from 'react-router-dom'
 import { useAuthentication } from '../../hooks/useAuthentication'
 import { useAuthContext } from '../../hooks/useAuthContext'
 const Login = () => {
-  const {authenticated} =useAuthContext()
+  const {authenticated,error} =useAuthContext()
   const {login} = useAuthentication()
   const navigate = useNavigate()
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
 
-  const error = false;
 
   useEffect(()=>{
     if(authenticated){
@@ -25,7 +24,7 @@ const Login = () => {
     }
 
     login(user)
-
+    
   }
   
   return (

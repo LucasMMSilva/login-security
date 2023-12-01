@@ -20,5 +20,13 @@ const removeLogToken = async (req,res)=>{
     }
     res.status(200).json({msg:'token apagado',isSuccess:true})
 }
+const CheckIfTheUserIsAlreadyLoggedIn = async (userid) => {
+    const log = await LogAuthentication.findOne({userId:userid})
+    if(log){
+        return true        
+    }else{
+        return false 
+    }
+}
 
-module.exports = {saveUserAndToken,removeLogToken}
+module.exports = {saveUserAndToken,removeLogToken,CheckIfTheUserIsAlreadyLoggedIn}

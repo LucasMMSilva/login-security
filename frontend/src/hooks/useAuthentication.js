@@ -2,7 +2,7 @@ import { useAuthContext } from "./useAuthContext";
 import { useNavigate } from "react-router-dom"
 import api from "./api";
 export const useAuthentication = () =>{
-    const {authenticated,setAuthenticated} = useAuthContext()
+    const {authenticated,setAuthenticated,setError} = useAuthContext()
     const navigate = useNavigate()
 
     const authUser = (data) => {
@@ -10,11 +10,13 @@ export const useAuthentication = () =>{
         setAuthenticated(true)
         navigate('/')
     }
-    const register = (data) => {
-        api.post('/register',data).then((response)=>{authUser(response.data)}).catch((err)=>{console.log('Erro no registro!')})
+    const register = async(data) => {
+        await api.post('/register',data).then((response)=>{authUser(response.data)}).catch((err)=>{console.log('Erro no registro!')})
     }
-    const login = (data) => {
-        api.post('/login',data).then((response)=>{authUser(response.data)}).catch((err)=>{console.log('Erro no login!')})
+    const login = async(data) => {
+        await api.post('/login',data).then((response)=>{authUser(response.data)}).catch((err)=>{
+            if(err.response.data.isLogged === true){setError(true)}
+        })
     }
 
     const logout = async()=>{
