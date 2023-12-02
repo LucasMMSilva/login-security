@@ -14,5 +14,5 @@ app.use(express.urlencoded({
 app.use('/',router)
 
 app.listen(5000,()=>{
-    console.log('conectado')
+    console.log('live server')
 })
