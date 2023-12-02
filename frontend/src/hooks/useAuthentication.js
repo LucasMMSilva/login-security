@@ -31,7 +31,10 @@ export const useAuthentication = () =>{
             setAuthenticated(false)
             navigate('/login')
         }).catch((err)=>{
-            
+            api.defaults.headers.Authorization = undefined
+            localStorage.removeItem('token')
+            setAuthenticated(false)
+            navigate('/login')
         })
         
     }

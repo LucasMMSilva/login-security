@@ -15,7 +15,6 @@ const Register = () => {
     if(authenticated){
       navigate('/')
     }
-    console.log(error.type)
   },[])
 
   const handleSubmit = (e)=>{

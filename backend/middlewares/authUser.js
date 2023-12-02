@@ -10,10 +10,12 @@ const authUser = async(req,res,next)=>{
 
     try{
         const verified = jwt.verify(token,jwtSecret)
-        req.user = await User.findById(verified.id).select('-password')
+        const user = await User.findById(verified.id).select('-password')
+        req.user = user
         next()
     }catch(error){
-        res.status(401).json({errors:["Token Invalido."]})
+        return res.status(401).json({errors:["Token Invalido."]})
+        
     }
 }
 module.exports = authUser

@@ -11,17 +11,18 @@ const saveUserAndToken = async (userId,token) => {
     return userLog 
 }
 const removeLogToken = async (req,res)=>{
-    const log = await LogAuthentication.findOne(req.user.userId)
+    const log = await LogAuthentication.findOne({userId:req.user._id.toString()})
+
     if(log){
-        await LogAuthentication.deleteOne(log)
+        await LogAuthentication.deleteOne({userId:req.user._id.toString()})
     }else{
-        res.status(422).json({msg:'Algo deu errado',isSuccess:false})
+        res.status(422).json({msg:'Invalid log',isSuccess:false})
         return
     }
     res.status(200).json({msg:'token apagado',isSuccess:true})
 }
-const CheckIfTheUserIsAlreadyLoggedIn = async (userid) => {
-    const log = await LogAuthentication.findOne({userId:userid})
+const CheckIfTheUserIsAlreadyLoggedIn = async (userId) => {
+    const log = await LogAuthentication.findOne({userId})
     if(log){
         return true        
     }else{
